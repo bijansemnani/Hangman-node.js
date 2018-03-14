@@ -12,8 +12,10 @@ function setWord() {
   count = 12;
 }
 
-function recurPrompt() {
-
+function recurPrompt(isFirst) {
+  if (isFirst) {
+    setWord();
+  }
 
   inquire.prompt([
     {
@@ -21,6 +23,10 @@ function recurPrompt() {
       message:"guess a letter"
     }
   ]).then(function (answer) {
-
+    word.guessWord(answer.letter);
+    console.log(word.retWord());
+    recurPrompt(false);
   });
 }
+
+recurPrompt(true);
