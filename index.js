@@ -50,7 +50,7 @@ function recurPrompt(isFirst) {
     else {
       recurPrompt(false);
     }
-    
+
   });
 }
 

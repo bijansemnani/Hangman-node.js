@@ -2,7 +2,7 @@
 var Letter = function (letter) {
   this.letter = letter;
   this.isGuess = false;
-  
+
   this.check = function (letter) {
     if(letter === this.letter){
       this.isGuess = true;
@@ -14,6 +14,9 @@ var Letter = function (letter) {
       return this.letter;
     }
     else {
+      if(this.letter === " "){
+        return " ";
+      }
       return "_";
     }
   };
