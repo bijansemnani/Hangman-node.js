@@ -5,12 +5,14 @@ var words = ["tiesto", "avicii", "alesso", "ram", "swedish house mafia"];
 var rand;
 var word;
 var count;
+var chances;
 var length;
 
 function setWord() {
   rand = words[Math.floor(Math.random()*words.length)];
   word = new Word(rand);
-  count = 12;
+  count = word.count;
+  chances = 12;
   length = rand.length;
 }
 
@@ -26,10 +28,21 @@ function recurPrompt(isFirst) {
     }
   ]).then(function (answer) {
     word.guessWord(answer.letter);
-    console.log(word.retWord());
+    var string = word.retWord();
+    if(count < word.count){
+      console.log("CORRECT!!!");
+      count = word.count;
+    }
+    else {
+      chances--;
+      console.log("INCORRECT, Guesses Left: " + chances);
+    }
+    console.log(string);
 
-    if (word.count === length) {
-      console.log("You are correct!!!");
+    if (word.count === length || chances === 0) {
+      if (word.count === length) {
+        console.log("You are correct!!!");
+      }
       inquire.prompt([
         {
           type:"confirm",
